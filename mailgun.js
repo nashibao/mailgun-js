@@ -49,7 +49,8 @@ module.exports = function (api_key, domain) {
       var d = '/' + domain;
       //filter out API calls that do not require a domain specified
       if ((resource.indexOf('routes') >= 0)
-        || (resource.indexOf('lists') >= 0)) {
+        || (resource.indexOf('lists') >= 0)
+        || (resource.indexOf('domains') >=0 )) {
         d = '';
       }
       return d;
@@ -514,6 +515,17 @@ module.exports = function (api_key, domain) {
 
           return del('/lists/' + listAddress + '/members/' + memberAddress, cb);
         }
+      }
+    },
+    domains: {
+      /**
+       * Returns a list of domains under your account.
+       * @param data {Object} the optional object containing the GET options 'address', 'limit' and 'skip'
+       * @param cb {Function} callback function accepting error, response and body
+       * @type {Function}
+       */
+      list: function (data, cb) {
+        return get('/domains', data, cb);
       }
     }
   };
